@@ -293,7 +293,8 @@
 #sll .month header b{margin-left:auto; flex:none}
 #sll.js .month header{gap:8px; padding-left:20px; padding-right:16px}
 #sll.js .month header .mono{white-space:normal; min-width:0; line-height:1.5; max-width:8.5em}
-#sll .month-body{display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.22,.7,.2,1)}
+#sll .month-body{display:grid; grid-template-rows:0fr}
+#sll.meses-listos .month-body{transition:grid-template-rows .45s cubic-bezier(.22,.7,.2,1)}   /* sin animación al cargar: en computador ya salen abiertos */
 #sll .month.open .month-body{grid-template-rows:1fr}
 #sll .month-body>div{overflow:hidden; min-height:0; display:flex; flex-direction:column}
 #sll .month:not(.open) .month-body>div{visibility:hidden}
@@ -850,9 +851,9 @@
         <p class="lede">A 12-week private program built around the life you actually live: ordering, getting around, making plans, telling a story. Two live sessions a week, and a city's worth of music, series and missions in between.</p>
         <div class="cta">
           <a class="btn" data-sll-test href="/level-test/">Take the free level test <span class="arr" aria-hidden="true">→</span></a>
-          <a class="btn ghost" href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5"/></svg>
-            Message Carolina on WhatsApp
+          <a class="btn ghost" data-sll-book href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+            Book a free call
           </a>
         </div>
         <p class="tiny">Twelve questions, about five minutes. Your first call is free.</p>
@@ -1159,7 +1160,7 @@
     <div class="head rv">
       <p class="mono">Questions</p>
       <h2>Before you <em>ask</em></h2>
-      <p>Something else? Message me on WhatsApp and I'll answer.</p>
+      <p>Something else? Book a free call and ask me anything.</p>
     </div>
     <div class="rv">
       <details><summary>I'm a complete beginner. Is this for me?</summary><p>Yes. The 12-week path starts from zero. You'll speak in the first session, even if it's only your name and where you're from.</p></details>
@@ -1182,7 +1183,7 @@
         <p>It takes five minutes. Send me your result and we book your free 20-minute call.</p>
         <div class="cta">
           <a class="btn" data-sll-test href="/level-test/">Take the free level test <span class="arr" aria-hidden="true">→</span></a>
-          <a class="btn ghost" href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">Message Carolina on WhatsApp</a>
+          <a class="btn ghost" data-sll-book href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">Book a free call</a>
         </div>
       </div>
       <div class="stamp" aria-hidden="true">Week<b>12</b>15 minutes<br>no English</div>
@@ -1202,7 +1203,7 @@
 
   var WHATSAPP='573122172229';
   /* CARO: pega aquí tu enlace de Cal.com, por ejemplo 'https://cal.com/tu-nombre/free-call' */
-  var BOOKING = 'https://cal.com/carolina-spanish/free-call';
+  var BOOKING = '/book/';
   /* CARO: dirección de la página del test de nivel (la otra página de Squarespace). */
   var TEST = '/level-test/';
   /* CARO: dirección del video de presentación (.mp4). Vacía = se ve la foto. */
@@ -1238,7 +1239,7 @@
     var a=document.createElement('div'); a.className='sll-fijo';
     var libro=BOOKING||wa('Hi Carolina! Can we book my free call?');
     a.innerHTML='<a class="t">Free level test</a><a class="c" target="_blank" rel="noopener">Book a free call</a>';
-    a.querySelector('.t').href=TEST; a.querySelector('.c').href=libro;
+    a.querySelector('.t').href=TEST; a.querySelector('.c').href=libro; a.querySelector('.c').removeAttribute('target');
     document.body.appendChild(a);
     function pinta(){
       var h=hero.getBoundingClientRect(), f=fin?fin.getBoundingClientRect():null, alto=window.innerHeight;
@@ -1248,7 +1249,7 @@
   })();
 
   /* Booking link */
-  if(BOOKING){ root.querySelectorAll('[data-sll-book]').forEach(function(a){ a.href=BOOKING; }); }
+  if(BOOKING){ root.querySelectorAll('[data-sll-book]').forEach(function(a){ a.href=BOOKING; a.removeAttribute('target'); }); }
 
   /* Reveal on scroll */
   var rv=root.querySelectorAll('.rv');
@@ -1278,10 +1279,11 @@
     var ch=el('span','chev'); ch.setAttribute('aria-hidden','true'); h.appendChild(ch);
     h.setAttribute('role','button'); h.tabIndex=0; h.setAttribute('aria-controls',body.id);
     function set(o){ m.classList.toggle('open',o); h.setAttribute('aria-expanded',String(o)); }
-    set(k===0);
+    set(root.clientWidth>680);   /* computador: los tres abiertos; celular: los tres recogidos */
     h.addEventListener('click',function(){ set(!m.classList.contains('open')); });
     h.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); set(!m.classList.contains('open')); } });
   });
+  setTimeout(function(){ root.classList.add('meses-listos'); },80);
 
   /* Local list: one panel at a time */
   var pills=document.getElementById('sll-pills'), panels=root.querySelectorAll('.panel');
