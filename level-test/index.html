@@ -879,6 +879,23 @@
   #sll .btn,#sll .btn .arr,#sll .bar i,#sll summary::after{transition:none}
   #sll.js .rv{opacity:1; transform:none; transition:none}
 }
+
+/* See your notebook (demo) */
+#sll .demo{border:1px solid var(--rule); border-radius:18px; overflow:hidden; background:var(--sheet); box-shadow:0 30px 60px -30px rgba(20,16,24,.35)}
+#sll .demobar{display:flex; align-items:center; gap:7px; padding:11px 16px; background:var(--ink); color:color-mix(in srgb,var(--paper) 70%,transparent); font:500 .74rem/1 var(--mono); letter-spacing:.04em}
+#sll .demobar i{width:10px; height:10px; border-radius:50%; background:color-mix(in srgb,var(--paper) 28%,transparent)}
+#sll .demobar span{margin-left:10px}
+#sll .demoscreen{position:relative; aspect-ratio:1650/1080}
+#sll .demoscreen.live{aspect-ratio:auto; height:min(760px,82vh)}
+#sll .demoscreen iframe{display:block; width:100%; height:100%; border:0}
+#sll .demogo{display:block; width:100%; height:100%; padding:0; border:0; background:none; cursor:pointer; position:relative}
+#sll .demogo picture{display:block; height:100%}
+#sll .demogo img{display:block; width:100%; height:100%; object-fit:cover; object-position:top left; transition:filter .3s}
+#sll .demogo:hover img,#sll .demogo:focus-visible img{filter:brightness(.82)}
+#sll .democta{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:var(--rosa); color:var(--on-rosa,#fff); font:600 1rem/1.2 var(--body); padding:1rem 1.6rem; border-radius:999px; white-space:nowrap; box-shadow:0 12px 30px rgba(20,16,24,.35)}
+#sll .demonote{margin-top:16px; font-size:.93rem; color:var(--muted)}
+#sll .demonote a{color:inherit; text-decoration:underline; text-underline-offset:3px}
+@media (max-width:680px){ #sll .demoscreen{aspect-ratio:780/1120} #sll .demoscreen.live{height:78vh} }
 #sll .tp-top{padding-bottom:0}
 #sll .tp-top .top{border-bottom:0}
 #sll .tp-top .brand{color:inherit; text-decoration:none}
@@ -909,6 +926,140 @@
   </div></div></div>
   <div class="foot dark"><div class="w"><p class="foot-say">Stop studying Spanish. <em>Start living it.</em></p><nav class="foot-links" aria-label="Contact"><a href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">WhatsApp</a><a data-sll-book href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">Book a free call</a><a data-sll-test href="https://claude.ai/artifact/KxXcLeqKcWXXKC2rLSBJKa" target="_blank" rel="noopener">Free level test</a></nav><span>Spanish Like a Local · Private Spanish classes with Carolina, a Colombian teacher in Medellín</span><span>© 2026 Spanish Like a Local</span><span>Medellín, Colombia · Online everywhere</span><span class="cred">Video music: “Bossa Antigua” by Kevin MacLeod (incompetech.com), licensed under CC BY 3.0</span></div></div>
 </div>
+<script>(function(){ var b=document.getElementById('sll-demo-go'), box=document.getElementById('sll-demo-screen'); if(!b||!box) return;
+    b.addEventListener('click',function(){ var f=document.createElement('iframe'); f.src='https://moraestudios.com/cuaderno/demo.html#today'; f.title='Demo notebook of a Spanish Like a Local student';
+      box.classList.add('live'); box.replaceChildren(f); }); })();</script>
+
+  <!-- ============ What's included ============ -->
+  <div class="sec" id="sll-included"><div class="w">
+    <div class="head rv">
+      <p class="mono">What's included</p>
+      <h2>Classes, and everything that keeps you practicing <em>between them</em></h2>
+      <p>All of it comes with both plans.</p>
+    </div>
+    <ul class="gets rv">
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="7" width="24" height="16" rx="3"/><path d="M12 27h8M13 13l6 3-6 3z"/></svg>
+        <h3>24 live sessions</h3><p>45 minutes each, twice a week, at a fixed time that fits your schedule.</p></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 4h14l4 4v20H8z"/><path d="M12 4v24M16 12h6M16 17h6M16 22h4"/></svg>
+        <h3>Your own notebook</h3><p>After every class: the new words, the phrases and my corrections, in one place online.</p></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="7" stroke-dasharray="2.5 3"/><path d="M12.5 16l2.5 2.5 4.5-5"/></svg>
+        <h3>A mission every week</h3><p>One small thing to do in Spanish, out in the real world, so it sticks.</p></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="6" width="22" height="20" rx="3"/><path d="M5 11h22M10 6v5M16 6v5M22 6v5M13 16l6 3-6 3z"/></svg>
+        <h3>Song and series challenges</h3><p>A song to learn and a show to follow, chosen for your level.</p></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s9-7.5 9-15a9 9 0 0 0-18 0c0 7.5 9 15 9 15z"/><circle cx="16" cy="13" r="3.2"/></svg>
+        <h3>Your local list</h3><p>Music, shows, comedy, books and places picked for your taste.</p></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="12" y="4" width="8" height="15" rx="4"/><path d="M7 15a9 9 0 0 0 18 0M16 24v4M12 28h8"/></svg>
+        <h3>Voice-note corrections</h3><p>Send me audios on WhatsApp. I correct them once a day, Monday to Friday.</p></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="9" width="18" height="13" rx="2.5"/><path d="M9 6h16a2 2 0 0 1 2 2v11M10 15h8"/></svg>
+        <h3>Practice tools</h3><p>Flashcards with audio made from your own classes, and conversation practice with AI.</p></li>
+      <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 26h22M8 26V16M14 26V11M20 26v-7M26 26V6"/></svg>
+        <h3>Progress checks</h3><p>At week 8 and week 12 we review how far you've come and adjust the plan.</p></li>
+    </ul>
+  </div></div>
+
+  <!-- ============ Plans (sin precios: el precio va en el plan de cada persona) ============ -->
+  <div class="sec" id="sll-plans"><div class="w">
+    <div class="head rv">
+      <p class="mono">Plans</p>
+      <h2>Two ways to <em>learn with me</em></h2>
+      <p>Same program, same materials. You get your price with your personal plan, on the free call.</p>
+    </div>
+    <div class="plans rv">
+      <div class="sheet plan main">
+        <span class="tag">Most personalized experience</span>
+        <h3>1-on-1</h3>
+        <p class="who">Private classes: all the speaking time is yours.</p>
+        <ul>
+          <li>24 private sessions of 45 minutes</li>
+          <li>A plan built around your level and your goals</li>
+          <li>Everything in “What's included”</li>
+        </ul>
+        <a class="btn" data-sll-book href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%27m%20interested%20in%20the%201-on-1%20Spanish%20program.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">Book your free introduction call <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <div class="sheet plan">
+        <span class="tag">Learn with a friend</span>
+        <h3>Duo</h3>
+        <p class="who">You and a friend or partner. Each of you pays less, and you get someone to practice with between classes.</p>
+        <ul>
+          <li>24 shared sessions of 45 minutes</li>
+          <li>Works best when you start at a similar level</li>
+          <li>Everything in “What's included”</li>
+        </ul>
+        <a class="btn line" data-sll-book href="https://wa.me/573122172229?text=Hi%20Carolina%21%20A%20friend%20and%20I%20are%20interested%20in%20the%20Duo%20Spanish%20program.%20Can%20we%20book%20a%20call%3F" target="_blank" rel="noopener">Book your free introduction call</a>
+      </div>
+    </div>
+    <div class="cmp rv" role="table" aria-label="1-on-1 and Duo compared">
+      <div role="row" class="cmp-h"><span role="columnheader"></span><b role="columnheader">1-on-1</b><b role="columnheader">Duo</b></div>
+      <div role="row"><span role="rowheader">Sessions</span><span role="cell">24 private, 45 minutes</span><span role="cell">24 shared, 45 minutes</span></div>
+      <div role="row"><span role="rowheader">Speaking time</span><span role="cell">All yours</span><span role="cell">Shared between two</span></div>
+      <div role="row"><span role="rowheader">Pace</span><span role="cell">Your own</span><span role="cell">Best at a similar level</span></div>
+      <div role="row"><span role="rowheader">Notebook, passport and local list</span><span role="cell">Included</span><span role="cell">Included</span></div>
+    </div>
+    <ul class="rules">
+      <li><b>Price and payment</b><span>Your price comes with your personal plan. You pay by PayPal, Wise or a secure payment link.</span></li>
+      <li><b>Rescheduling</b><span>Tell me 24 hours before and we move the session.</span></li>
+      <li><b>Time to finish</b><span>You have 14 weeks to use your 24 sessions.</span></li>
+      <li><b>How to start</b><span>Book a free 20-minute call. You pay only when you decide to start.</span></li>
+    </ul>
+  </div></div>
+
+  <!-- ============ Questions ============ -->
+  <div class="sec" id="sll-faq"><div class="w faq">
+    <div class="head rv">
+      <p class="mono">Questions</p>
+      <h2>Before you <em>ask</em></h2>
+      <p>Something else? Book a free call and ask me anything.</p>
+    </div>
+    <div class="rv">
+      <details><summary>I'm a complete beginner. Is this for me?</summary><p>Yes. The 12-week path starts from zero. You'll speak in the first session, even if it's only your name and where you're from.</p></details>
+      <details><summary>I already speak some Spanish. Do I start at week 1?</summary><p>No. Take the level test and book your call: your result comes with the booking. We skip what you know and I build the 12 weeks from your level.</p></details>
+      <details><summary>What levels do you teach?</summary><p>From complete beginner to advanced. The free level test places you in one of four levels (Beginner, Elementary, Intermediate or Advanced) and your plan starts from there.</p></details>
+      <details><summary>What results can I expect in 12 weeks?</summary><p>The goal is a 15-minute conversation in Spanish without switching to English. How far you get depends on where you start and how much you practice between classes, so I won't promise fluency in three months. At week 8 we check your progress and adjust your plan.</p></details>
+      <details><summary>How do you teach?</summary><p>You talk from the first minute. I explain each rule in plain English in a couple of minutes, then you use it right away. I correct you without stopping the conversation, and the corrections go into your notebook.</p></details>
+      <details><summary>What does a class look like?</summary><p>Forty-five minutes in four parts: a warm-up in Spanish, one new topic with examples from your own life, practice in a real situation (a role-play or a conversation), and a wrap-up with corrections and your mission for the week.</p></details>
+      <details><summary>How quickly will I notice progress?</summary><p>You speak in your first class. Every week ends with a mission in real life, so you notice it the first time you order, text or chat in Spanish that week. How fast it goes depends on how much you practice between classes.</p></details>
+      <details><summary>Can I choose topics based on my interests?</summary><p>Yes. Your plan starts from your level and what you want Spanish for: travel, work, your partner's family, living in Medellín. Your local list of music, series and places follows your taste too.</p></details>
+      <details><summary>Do I have to be in Medellín?</summary><p>No. Classes are online on Google Meet, and the music and series challenges work from anywhere. When I'm in Medellín we can meet in person, at no extra cost.</p></details>
+      <details><summary>How much time does it take outside class?</summary><p>Plan on about twenty minutes a day. Most of it is things you'd enjoy anyway: a song, an episode, a voice note to me.</p></details>
+      <details><summary>What if I travel or miss a session?</summary><p>Tell me 24 hours before and we reschedule. Without notice, the session counts as used. You have 14 weeks to use your 24 sessions.</p></details>
+      <details><summary>Can I change my schedule?</summary><p>Yes. Tell me 24 hours before and we move the session to another time that works for both of us.</p></details>
+      <details><summary>What happens if I don't complete the program?</summary><p>You have 14 weeks to use your 24 sessions, so there is room for a trip or a busy week. If you pay monthly, each payment covers the month you are about to start.</p></details>
+      <details><summary>What happens after the 12 weeks?</summary><p>In week 12 we look at how far you've come and plan what comes next together.</p></details>
+      <details><summary>How does Duo work?</summary><p>You and one other person share every session, and each of you pays your own plan. It works best when you start at a similar level.</p></details>
+      <details><summary>How much does it cost?</summary><p>You get the price together with your personal plan, on the free 20-minute call. There's no commitment: you pay only when you decide to start.</p></details>
+      <details><summary>How do I pay?</summary><p>By PayPal, Wise or a secure payment link. You can pay month by month, each payment before that month's first session, or everything upfront.</p></details>
+      <details><summary>What happens on the free call?</summary><p>It's 20 minutes on Google Meet. After you book, send me a short voice note on WhatsApp: your level test result, a quick hello in Spanish (“Hola, me llamo...”) and why you want to learn. If you can't say it in Spanish yet, English is fine. On the call we get to know each other, I answer your questions and you decide if it's for you.</p></details>
+    </div>
+  </div></div>
+
+  <!-- ============ Level test (only shows when scripts are allowed) ============ -->
+  <div class="sec" id="sll-test" hidden><div class="w">
+    <div class="head" style="margin-left:auto;margin-right:auto;max-width:740px">
+      <p class="mono">Free level test</p>
+      <h2>Find out <em>where you stand</em></h2>
+      <p>Twelve questions, from easy to hard. If you don't know one, guess and keep going.</p>
+    </div>
+    <div class="sheet test" id="sll-testbox" aria-live="polite"></div>
+  </div></div>
+
+  <!-- ============ Closing ============ -->
+  <div class="end dark">
+    <div class="w">
+      <div>
+        <h2>Start with the <em>level test</em></h2>
+        <p>It takes five minutes, and your result goes with you when you book your free 20-minute call.</p>
+        <div class="cta">
+          <a class="btn" data-sll-test href="https://claude.ai/artifact/KxXcLeqKcWXXKC2rLSBJKa" target="_blank" rel="noopener">Take your free Spanish level test <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn ghost" data-sll-book href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">Book your free introduction call</a>
+        </div>
+      </div>
+      <div class="stamp" aria-hidden="true">Week<b>12</b>15 minutes<br>no English</div>
+    </div>
+  </div>
+  <div class="foot dark"><div class="w"><p class="foot-say">Stop studying Spanish. <em>Start living it.</em></p><nav class="foot-links" aria-label="Contact"><a href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">WhatsApp</a><a data-sll-book href="https://wa.me/573122172229?text=Hi%20Carolina%21%20I%20want%20to%20learn%20Spanish.%20Can%20we%20book%20my%20free%20call%3F" target="_blank" rel="noopener">Book a free call</a><a data-sll-test href="https://claude.ai/artifact/KxXcLeqKcWXXKC2rLSBJKa" target="_blank" rel="noopener">Free level test</a></nav><span>Spanish Like a Local · Private Spanish classes with Carolina, a Colombian teacher in Medellín</span><span>© 2026 Spanish Like a Local</span><span>Medellín, Colombia · Online everywhere</span><span class="cred">Video music: “Bossa Antigua” by Kevin MacLeod (incompetech.com), licensed under CC BY 3.0</span></div></div>
+
+</div>
+
 <script>
 /* If Squarespace blocks scripts the page still works: the test buttons open the test in a new
    tab, every recommendation list shows at once, and nothing stays hidden. */

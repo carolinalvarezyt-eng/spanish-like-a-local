@@ -879,6 +879,23 @@
   #sll .btn,#sll .btn .arr,#sll .bar i,#sll summary::after{transition:none}
   #sll.js .rv{opacity:1; transform:none; transition:none}
 }
+
+/* See your notebook (demo) */
+#sll .demo{border:1px solid var(--rule); border-radius:18px; overflow:hidden; background:var(--sheet); box-shadow:0 30px 60px -30px rgba(20,16,24,.35)}
+#sll .demobar{display:flex; align-items:center; gap:7px; padding:11px 16px; background:var(--ink); color:color-mix(in srgb,var(--paper) 70%,transparent); font:500 .74rem/1 var(--mono); letter-spacing:.04em}
+#sll .demobar i{width:10px; height:10px; border-radius:50%; background:color-mix(in srgb,var(--paper) 28%,transparent)}
+#sll .demobar span{margin-left:10px}
+#sll .demoscreen{position:relative; aspect-ratio:1650/1080}
+#sll .demoscreen.live{aspect-ratio:auto; height:min(760px,82vh)}
+#sll .demoscreen iframe{display:block; width:100%; height:100%; border:0}
+#sll .demogo{display:block; width:100%; height:100%; padding:0; border:0; background:none; cursor:pointer; position:relative}
+#sll .demogo picture{display:block; height:100%}
+#sll .demogo img{display:block; width:100%; height:100%; object-fit:cover; object-position:top left; transition:filter .3s}
+#sll .demogo:hover img,#sll .demogo:focus-visible img{filter:brightness(.82)}
+#sll .democta{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:var(--rosa); color:var(--on-rosa,#fff); font:600 1rem/1.2 var(--body); padding:1rem 1.6rem; border-radius:999px; white-space:nowrap; box-shadow:0 12px 30px rgba(20,16,24,.35)}
+#sll .demonote{margin-top:16px; font-size:.93rem; color:var(--muted)}
+#sll .demonote a{color:inherit; text-decoration:underline; text-underline-offset:3px}
+@media (max-width:680px){ #sll .demoscreen{aspect-ratio:780/1120} #sll .demoscreen.live{height:78vh} }
 #sll .tp-top{padding-bottom:0}
 #sll .tp-top .top{border-bottom:0}
 #sll .tp-top .brand{color:inherit; text-decoration:none}

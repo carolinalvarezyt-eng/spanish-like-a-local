@@ -1139,11 +1139,12 @@ function nbBuild(root,b){
   function undo(){ const u=NB.undo.pop(); if(!u) return; NB.pages[u.pid].items=JSON.parse(u.items); NB.sel=null; paintPage(u.pid); nbSavePage(u.pid); paintTools(); }
   function visibleY(pid){ const pe=pageEls[pid]; if(!pe) return 80; const r=pe.wrap.getBoundingClientRect(); return Math.max(40,Math.min(H-300,(-r.top+120)/scale())); }
 
-  function paintAll(){ pages.replaceChildren(); b.pages.forEach((pid,i)=>{ const wrap=el('div','pgwrap'), lab=el('div','pglab'); lab.append(el('span','mono','Page '+(i+1)));
+  function paintAll(){ const y=window.scrollY, sl=pages.scrollLeft, s0=scale(), frag=document.createDocumentFragment(); b.pages.forEach((pid,i)=>{ const wrap=el('div','pgwrap'), lab=el('div','pglab'); lab.append(el('span','mono','Page '+(i+1)));
       if(b.pages.length>1){ const d=el('button','back','Remove page'); d.type='button'; d.style.color='var(--muted)'; d.addEventListener('click',async()=>{ if(!confirm('Remove page '+(i+1)+'? This cannot be undone.')) return; b.pages.splice(i,1); delete NB.pages[pid]; await KV.del('page:'+pid); await nbSaveBooks(); paintAll(); }); lab.append(d); }
-      const s=scale(), box=el('div','pgbox'); box.style.width=(W*s)+'px'; box.style.height=(H*s)+'px';
+      const s=s0, box=el('div','pgbox'); box.style.width=(W*s)+'px'; box.style.height=(H*s)+'px';
       const pg=el('div','pg paper-'+b.paper+(b.layout==='spread'?' spread':'')); pg.style.width=W+'px'; pg.style.height=H+'px'; pg.style.transform='scale('+s+')';
-      box.append(pg); add(wrap,lab,box); pages.append(wrap); pageEls[pid]={wrap:wrap,pg:pg,box:box}; bindPage(pid,pg); paintPage(pid); }); }
+      box.append(pg); add(wrap,lab,box); frag.append(wrap); pageEls[pid]={wrap:wrap,pg:pg,box:box}; bindPage(pid,pg); paintPage(pid); });
+    pages.replaceChildren(frag); pages.scrollLeft=sl; if(Math.abs(window.scrollY-y)>1) window.scrollTo(0,y); }
   function paintPage(pid){ const pe=pageEls[pid]; if(!pe) return; const pg=pe.pg, P=NB.pages[pid]; pg.replaceChildren();
     const under=el('div','layer'), ns='http://www.w3.org/2000/svg', sv=document.createElementNS(ns,'svg'), over=el('div','layer');
     sv.setAttribute('class','ink'); sv.setAttribute('viewBox','0 0 '+W+' '+H); sv.setAttribute('width',W); sv.setAttribute('height',H);
@@ -1201,7 +1202,7 @@ function nbBuild(root,b){
       if(tool==='arrow'){ snapshot(pid); const it={id:uid(),t:'arrow',x1:x,y1:y,x2:x+1,y2:y,c:NB.color,sw:NB.size}; P.items.push(it); act={arrow:it}; pg.setPointerCapture(e.pointerId); return; }
       if(tool==='text'||tool==='note'){ snapshot(pid); const it=tool==='text'?{id:uid(),t:'text',x:x,y:y-20,w:Math.min(520,W-x-20),txt:'',c:NB.color,font:NB.font,size:[24,36,56][[2,4,8].indexOf(NB.size)]||36}
           :{id:uid(),t:'note',x:x-20,y:y-20,w:260,h:220,txt:'',bg:NB.note,font:NB.font};
-        P.items.push(it); NB.sel=it.id; paintPage(pid); paintTools(); setTimeout(()=>{ const n=pg.querySelector('[data-id="'+it.id+'"] .tx'); if(n) n.focus(); },0); NB.tool='select'; paintTools(); }
+        P.items.push(it); NB.sel=it.id; paintPage(pid); paintTools(); setTimeout(()=>{ const n=pg.querySelector('[data-id="'+it.id+'"] .tx'); if(n) n.focus({preventScroll:true}); },0); NB.tool='select'; paintTools(); }
     });
     function eraseAt(x,y){ const P=NB.pages[pid], before=P.items.length; P.items=P.items.filter(q=>!(['ink','arrow','rect','ellipse'].indexOf(q.t)>=0&&hit(q,x,y,8))); if(P.items.length!==before) paintPage(pid); }
     let raf=null;
@@ -1785,7 +1786,8 @@ function exPanel(){ const c=lastClass();
 function modeSwitch(){ const inClass=S.view==='clase', cur=inClass?S.cm:(S.nbx||'nb');
   const w=el('div','mswitch'); w.setAttribute('role','tablist'); w.setAttribute('aria-label','Switch between your notebook and the exercises');
   [['nb','Notebook'],['ex','Exercises']].forEach(s=>{ const b=el('button',null,s[1]); b.type='button'; b.setAttribute('role','tab'); b.setAttribute('aria-selected',String(cur===s[0]));
-    b.addEventListener('click',()=>{ if(cur===s[0]) return; if(inClass) S.cm=s[0]; else S.nbx=s[0]; render(); window.scrollTo(0,0); }); w.append(b); });
+    b.addEventListener('click',()=>{ if(cur===s[0]) return; const pos=S.pos||(S.pos={}), pre=(inClass?'cm':'nb')+':'; pos[pre+cur]=window.scrollY;
+      if(inClass) S.cm=s[0]; else S.nbx=s[0]; render(); const go=()=>window.scrollTo(0,pos[pre+s[0]]||0); go(); requestAnimationFrame(go); setTimeout(go,350); }); w.append(b); });
   return w; }
 function vNotebookTab(){ if(S.nbx==='ex'){ const f=document.createDocumentFragment(); add(f, el('p','mono','Exercises')); const t=el('h1','title'); t.append('Your ',el('em',null,'class exercises')); f.append(t, exPanel()); return f; } return vNotebook(); }
 /* ---------- booking (Cal.com inside the page) ---------- */
@@ -1832,7 +1834,9 @@ function vBook(){
 }
 const VIEWS={today:vToday,classes:vClasses,notebook:vNotebookTab,play:vPlay,passport:vPassport,practice:vPractice,picks:vPicks,docs:vDocs,teacher:vTeacher,clase:vClassMode,book:vBook};
 function stateBox(title,text){ const s=el('div','state'); add(s,el('h1',null,title),el('p',null,text)); return s; }
-function render(){
+function render(){ const k=S.view+'|'+(S.nbx||'')+'|'+(S.cm||'')+'|'+(NB.open||''), keep=k===render.k, y=window.scrollY; render.k=k;
+  renderView(); if(keep&&Math.abs(window.scrollY-y)>1) window.scrollTo(0,y); }
+function renderView(){
   paintTop(); const m=$('#main');
   if(S.status==='loading'){ m.replaceChildren(stateBox('Opening your notebook…','One moment.')); return; }
   if(S.status==='slow'){ m.replaceChildren(stateBox('Still loading','Your notebook is taking longer than usual. Check your connection and open the page again.')); return; }
